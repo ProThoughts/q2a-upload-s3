@@ -18,10 +18,11 @@ class q2a_upload_s3 {
 		// process the admin form if admin hit Save-Changes-button
 		$ok = null;
 		if (qa_clicked('q2a_upload_s3_save')) {
-			qa_opt('q2a_upload_s3_access_key_id', qa_post_text('q2a_upload_s3_access_key_id'));
-			qa_opt('q2a_upload_s3_secret_access_key', qa_post_text('q2a_upload_s3_secret_access_key'));
-			qa_opt('q2a_upload_s3_region', qa_post_text('q2a_upload_s3_region'));
-			qa_opt('q2a_upload_s3_bucket', qa_post_text('q2a_upload_s3_bucket'));
+			qa_opt(US3_AWS_ID, qa_post_text(US3_AWS_ID));
+			qa_opt(US3_AWS_SECRET, qa_post_text(US3_AWS_SECRET));
+			qa_opt(US3_S3_REGION, qa_post_text(US3_S3_REGION));
+			qa_opt(US3_S3_BUCKET, qa_post_text(US3_S3_BUCKET));
+			qa_opt(US3_S3_IMGURL, qa_post_text(US3_S3_IMGURL));
 			$ok = qa_lang('admin/options_saved');
 		}
 
@@ -74,6 +75,13 @@ class q2a_upload_s3 {
 			'label' => qa_lang('q2a_upload_s3_lang/s3_bucket'),
 			'tags' => 'name="'.US3_S3_BUCKET.'"',
 			'value' => qa_opt(US3_S3_BUCKET),
+		);
+
+		$fields[] = array(
+			'type' => 'input',
+			'label' => qa_lang('q2a_upload_s3_lang/s3_imgurl'),
+			'tags' => 'name="'.US3_S3_IMGURL.'"',
+			'value' => qa_opt(US3_S3_IMGURL),
 		);
 
 		return array(

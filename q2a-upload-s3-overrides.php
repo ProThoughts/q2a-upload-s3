@@ -101,18 +101,22 @@ function qa_read_blob_file($blobid, $format)
 	try {
 		$s3 = get_s3_client();
 		if ($s3) {
+			$imgurl = qa_opt(US3_S3_IMGURL);
 			$filename = s3_get_blob_filename($blobid, $format);
-			$result = $s3->getObject(array(
-				'Bucket' => qa_opt(US3_S3_BUCKET),
-				'Key'    => $filename,
-			));
-			if (isset($result['Body'])) {
-				$contents = $result['Body'];
-			}
 
-			// if (is_readable($filename)) {
-			// 	$contents = file_get_contents($filename);
-			// }
+			// URLを指定して画像を読み込む
+			$contents = file_get_contents($imgurl.$filename);
+
+			if (!isset($contents)) {
+				// 読み込み失敗時はAPIを使用する
+				$result = $s3->getObject(array(
+					'Bucket' => qa_opt(US3_S3_BUCKET),
+					'Key'    => $filename,
+				));
+				if (isset($result['Body'])) {
+					$contents = $result['Body'];
+				}
+			}
 
 		}
 		$s3 = null;

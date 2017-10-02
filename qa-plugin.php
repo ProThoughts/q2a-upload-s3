@@ -26,6 +26,7 @@ define('US3_AWS_ID', 'q2a_upload_s3_access_key_id');
 define('US3_AWS_SECRET', 'q2a_upload_s3_secret_access_key');
 define('US3_S3_REGION', 'q2a_upload_s3_region');
 define('US3_S3_BUCKET', 'q2a_upload_s3_bucket');
+define('US3_S3_IMGURL', 'q2a_upload_s3_imgurl');
 
 
 // language file
